@@ -53,19 +53,19 @@ export const ModalComponent = () => {
     setTodo([""]);
     setTitle("");
     // sentDataToLocalStorage = false;
-    console.log(data);
+    // console.log(data);
   }
 
-  console.log(localStorage.getItem("todos"), "localStorage");
+  // console.log(localStorage.getItem("todos"), "localStorage");
   function handleUpdateModal(index, e) {
-    console.log(e, index);
+    // console.log(e, index);
     setUpdateValue(e);
     SetUpdateOpen(true);
     setUpdateIndex(index);
     e.todo.map((e) => {
       updatedTodo.push(e);
     });
-    console.log(updatedTodo, "updatetodo");
+    // console.log(updatedTodo, "updatetodo");
     setUpdatedTitle(e.title);
   }
   function handleUpdateClose() {
@@ -91,27 +91,39 @@ export const ModalComponent = () => {
   function handleDeleteTodoCard(index) {
     let userConsent = prompt("Are you sure you want to delete it", "yes");
     if (userConsent == "yes" || userConsent == "Yes") {
-      console.log(userConsent);
+      // console.log(userConsent);
       data.splice(index, 1);
       const updatedData = data.slice(0);
       setData(updatedData);
 
-      console.log(data);
+      // console.log(data);
     }
   }
   useEffect(() => {
-    let getDataFromLocalS = localStorage.getItem("todos");
+    let getDataFromLocalS = window.localStorage.getItem("todos");
     console.log(getDataFromLocalS, "useef");
+
+    console.log("hello world2");
     if (getDataFromLocalS == null) {
     } else {
+      console.log("inside");
       setData(JSON.parse(getDataFromLocalS));
     }
+    // let getDataFromLocalS = localStorage.getItem("todos");
+    // console.log(getDataFromLocalS, "useef");
+    // if (getDataFromLocalS == null) {
+    // } else {
+    //   setData(JSON.parse(getDataFromLocalS));
+    // }
   }, []);
   useEffect(() => {
+    window.localStorage.setItem("todos", JSON.stringify(data));
+    console.log("Hello world");
     console.log("rending");
-    localStorage.setItem("todos", JSON.stringify(data));
+    console.log(data);
+    // localStorage.setItem("todos", JSON.stringify(data));
   }, [data]);
-  console.log("delete");
+  // console.log("delete");
   return (
     <div>
       <div style={{ textAlign: "center" }}>
